@@ -229,6 +229,6 @@ bindsym $mod+Print exec grim - | wl-copy
 bindsym $mod+d exec wofi --show drun
 
 # autostart apps
-exec_always ~/Apps/pcloud
+exec ~/.config/sway/suspendlaptop.sh
 
 include /etc/sway/config.d/*
