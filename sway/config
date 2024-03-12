@@ -212,6 +212,12 @@ input "type:keyboard" {
     xkb_options grp:caps_toggle
 }
 
+# sway idle
+exec swayidle -w \
+          timeout 60 'brightnessctl s 30%' resume 'brightnessctl s 70%' \
+          timeout 300 'swaymsg "output * dpms off"; swaylock -f -c 000000' resume 'swaymsg "output * dpms on"' \
+          timeout 1200 'systemctl suspend' before-sleep 'swaymsg "output * dpms on"'
+
 # volume 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
@@ -225,10 +231,14 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Print exec grim - | wl-copy
 
-# wofi launcher
+# sway audio/video/mic idle disable
+exec sway-audio-idle-inhibit --dry-print-both
+
+# Apps
 bindsym $mod+d exec wofi --show drun
+bindsym $mod+Shift+v exec copyq toggle
 
 # autostart apps
-exec ~/.config/sway/suspendlaptop.sh
+exec ~/Apps/pcloud
 
 include /etc/sway/config.d/*
