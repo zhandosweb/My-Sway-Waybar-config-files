@@ -240,5 +240,6 @@ bindsym $mod+Shift+v exec copyq toggle
 
 # autostart apps
 exec ~/Apps/pcloud
+exec copyq
 
 include /etc/sway/config.d/*
