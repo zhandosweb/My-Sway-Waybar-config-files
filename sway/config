@@ -212,6 +212,9 @@ input "type:keyboard" {
     xkb_options grp:caps_toggle
 }
 
+# dbus activation
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 # sway idle
 exec swayidle -w \
           timeout 60 'brightnessctl s 30%' resume 'brightnessctl s 70%' \
