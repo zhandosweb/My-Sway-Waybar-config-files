@@ -217,8 +217,8 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 
 # sway idle
 exec swayidle -w \
-          timeout 60 'brightnessctl s 30%' resume 'brightnessctl s 70%' \
-          timeout 300 'swaymsg "output * dpms off"; swaylock -f -c 000000' resume 'swaymsg "output * dpms on"' \
+          timeout 120 'brightnessctl s 30%' resume 'brightnessctl s 70%' \
+          timeout 360 'swaymsg "output * dpms off"; swaylock -f -c 000000' resume 'swaymsg "output * dpms on"' \
           timeout 1200 'systemctl suspend' before-sleep 'swaymsg "output * dpms on"'
 
 # volume 
@@ -233,9 +233,6 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 # screenshots
 bindsym Print exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Print exec grim - | wl-copy
-
-# sway audio/video/mic idle disable
-exec sway-audio-idle-inhibit --dry-print-both
 
 # Apps
 bindsym $mod+d exec wofi --show drun

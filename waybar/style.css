@@ -61,3 +61,7 @@ window#waybar {
 #workspaces {
     margin: 0 4px;
 }
+
+#language {
+  min-width: 20px;
+}
