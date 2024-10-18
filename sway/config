@@ -212,13 +212,22 @@ input "type:keyboard" {
     xkb_options grp:caps_toggle
 }
 
+# touchpad
+
+input "type:touchpad" {
+	dwt enabled
+	tap enabled
+	natural_scroll disabled
+	middle_emulation enabled
+}
+
 # dbus activation
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # sway idle
 exec swayidle -w \
-          timeout 120 'brightnessctl s 30%' resume 'brightnessctl s 70%' \
-          timeout 360 'swaymsg "output * dpms off"; swaylock -f -c 000000' resume 'swaymsg "output * dpms on"' \
+          timeout 180 'brightnessctl s 30%' resume 'brightnessctl s 70%' \
+          timeout 600 'swaymsg "output * dpms off"; swaylock -f -c 000000' resume 'swaymsg "output * dpms on"' \
           timeout 1200 'systemctl suspend' before-sleep 'swaymsg "output * dpms on"'
 
 # volume 
@@ -241,5 +250,15 @@ bindsym $mod+Shift+v exec copyq toggle
 # autostart apps
 exec ~/Apps/pcloud
 exec copyq
+
+# fonts setup
+exec --no-startup-id gsettings set org.gnome.desktop.interface font-name 'Ubuntu 11'
+exec --no-startup-id gsettings set org.gnome.desktop.interface document-font-name 'Ubuntu 11'
+exec --no-startup-id gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
+
+# cursor and icons setup
+exec --no-startup-id gsettings set org.gnome.desktop.interface cursor-theme 'Yaru'
+exec --no-startup-id gsettings set org.gnome.desktop.interface icon-theme 'Yaru'
+exec --no-startup-id gsettings set org.gnome.desktop.interface gtk-theme 'Yaru'
 
 include /etc/sway/config.d/*
