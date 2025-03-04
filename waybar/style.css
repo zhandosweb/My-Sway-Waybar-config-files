@@ -33,7 +33,10 @@ window#waybar {
 #taskbar button.focused {
     background-image: linear-gradient(0deg, @selection, @background-darker);
 }
-#clock {
+
+#clock,
+#clock.time,
+#clock.date {
     padding: 0 4px;
     background: @background;
 }
@@ -63,5 +66,5 @@ window#waybar {
 }
 
 #language {
-  min-width: 20px;
+    min-width: 20px;
 }
