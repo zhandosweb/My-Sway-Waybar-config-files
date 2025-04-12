@@ -27,7 +27,8 @@ return {
             opt = {            -- vim.opt.<key>
                 relativenumber = true, -- sets vim.opt.relativenumber
                 number = true, -- sets vim.opt.number
-                spell = false, -- sets vim.opt.spell
+                spell = true, -- sets vim.opt.spell
+                spelllang = { "ru", "en" },
                 signcolumn = "yes", -- sets vim.opt.signcolumn to yes
                 wrap = true,  -- sets vim.opt.wrap
             },
@@ -57,13 +58,16 @@ return {
                     end,
                     desc = "Close buffer from tabline",
                 },
-
-                -- tables with just a `desc` key will be registered with which-key if it's installed
-                -- this is useful for naming menus
-                -- ["<Leader>b"] = { desc = "Buffers" },
-
-                -- setting a mapping to false will disable it
-                -- ["<C-S>"] = false,
+            },
+            i = {
+                -- Set up autocommand to switch to English layout when leaving insert mode / При переходе в нормальный режим - меняется клавиатура на английский автоматический
+                ["<ESC>"] = {
+                    function()
+                        vim.cmd [[ silent !swaymsg input type:keyboard xkb_switch_layout 0 ]]
+                        vim.api.nvim_command('stopinsert')
+                    end,
+                    desc = "Exit insert mode and switch to English layout"
+                },
             },
         },
     },
